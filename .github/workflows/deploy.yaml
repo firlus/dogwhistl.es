@@ -28,3 +28,4 @@ jobs:
           server: dogwhistles.4lus.de
           username: dogwhistles
           password: ${{ secrets.FTP_PASSWORD}}
+          local-dir: ./dist/
