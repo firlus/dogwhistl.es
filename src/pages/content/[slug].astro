@@ -1,0 +1,49 @@
+---
+import { Client } from "@notionhq/client";
+import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import { getSlug } from "../../helper/getSlug";
+dotenv.config();
+
+const slug = Astro.params.slug;
+
+// Get all paths
+export async function getStaticPaths() {
+  const notion = new Client({ auth: process.env.NOTION_KEY });
+  const database_id = process.env.NOTION_DATABASE_ID;
+  const pages = await notion.databases.query({ database_id });
+  return pages.results.map((result) => ({ params: { slug: getSlug(result) } }));
+}
+
+// Set up Notion integration
+const notion = new Client({ auth: process.env.NOTION_KEY });
+const database_id = process.env.NOTION_DATABASE_ID;
+
+// Get page data
+const pages = await notion.databases.query({ database_id });
+const page = pages.results.find((result) => getSlug(result) === slug);
+---
+
+<meta charset="utf-8" />
+<div class="container mx-auto flex flex-col gap-8 py-16">
+  <div>
+    <h1 class="text-4xl font-bold mb-2">
+      {page.properties.Name.title[0].text.content}
+    </h1>
+    <div class="flex flex-wrap mb-2 gap-2">
+      {
+        page.properties.Tags.multi_select.map((tag) => (
+          <div class="bg-teal-700 text-white rounded-full px-3">{tag.name}</div>
+        ))
+      }
+    </div>
+    <div class="bg-orange-200 text-orange-700 px-3 py-2 rounded-lg">
+      <p class="font-bold">Achtung!</p>
+      Nicht bei jeder Verwendung der Elemente aus dieser Sammlung ist davon auszugehen,
+      dass es sich um eine Dogwhistle handelt. Es ist stets der Kontext relevant,
+      um zu verstehen, wie Symbole verwendet werden.
+    </div>
+    <p>
+      {JSON.stringify(page)}
+    </p>
+  </div>
+</div>
