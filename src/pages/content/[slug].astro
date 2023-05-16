@@ -40,10 +40,9 @@ const blocks = await notion.blocks.children.list({ block_id: page.id });
     }
   </div>
   <div class="bg-orange-200 text-orange-700 px-3 py-2 rounded-lg">
-    <p class="font-bold">Achtung!</p>
-    Nicht bei jeder Verwendung der Elemente aus dieser Sammlung ist davon auszugehen,
-    dass es sich um eine Dogwhistle handelt. Es ist stets der Kontext relevant, um
-    zu verstehen, wie Symbole verwendet werden.
+    <p class="font-bold">Trigger-Warnungen</p>
+    Die entsprechenden Kategorien der einzelnen Artikel sind auch als Triggerwarnungen
+    zu verstehen
   </div>
   <div>
     {blocks.results.map((block) => <Block block={block} />)}
