@@ -1,7 +1,7 @@
-import { _ } from "lodash";
+import kebabCase from "lodash/kebabCase";
 
 export function getSlug(result) {
-  return _.kebabCase(result.properties.Name.title[0].text.content).replace(
+  return kebabCase(result.properties.Name.title[0].text.content).replace(
     /[^\x00-\x7F]/g,
     ""
   );
