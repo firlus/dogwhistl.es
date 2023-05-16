@@ -27,4 +27,4 @@ jobs:
         with:
           server: dogwhistles.4lus.de
           username: dogwhistles
-          password: ${{ secrets.password }}
+          password: ${{ secrets.FTP_PASSWORD}}
