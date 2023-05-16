@@ -25,7 +25,7 @@ jobs:
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: dogwhistles.4lus.de
+          server: dogwhistl.es
           username: dogwhistles
           password: ${{ secrets.FTP_PASSWORD}}
           local-dir: ./dist/
