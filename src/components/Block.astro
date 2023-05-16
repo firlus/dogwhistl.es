@@ -1,0 +1,30 @@
+---
+import Heading1 from "./blocks/Heading1.astro";
+import Image from "./blocks/Image.astro";
+import Paragraph from "./blocks/Paragraph.astro";
+
+export interface Props {
+  block: any;
+}
+
+const { block } = Astro.props;
+---
+
+<p>
+  {
+    block.type === "paragraph" && (
+      <Paragraph text={block.paragraph.rich_text[0]?.text?.content} />
+    )
+  }
+  {
+    block.type === "heading_1" && (
+      <Heading1 text={block.heading_1.rich_text[0]?.text?.content} />
+    )
+  }
+  {
+    block.type === "heading_2" && (
+      <Heading1 text={block.heading_2.rich_text[0]?.text?.content} />
+    )
+  }
+  {block.type === "image" && <Image url={block.image.file?.url} />}
+</p>

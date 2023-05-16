@@ -1,0 +1,11 @@
+---
+export interface Props {
+  url: string;
+}
+
+const { url } = Astro.props;
+---
+
+<div class="mb-2 flex justify-center">
+  <img src={url} />
+</div>

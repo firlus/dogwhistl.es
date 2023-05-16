@@ -11,9 +11,9 @@ const notion = new Client({ auth: process.env.NOTION_KEY });
 
 const database_id = process.env.NOTION_DATABASE_ID;
 
-const pages = (await notion.databases.query({ database_id })).results.sort(
-  (a, b) => getSlug(a).localeCompare(getSlug(b))
-);
+const pages = (await notion.databases.query({ database_id })).results
+  .filter((result) => result.properties.Veröffentlicht.select?.name === "Ja")
+  .sort((a, b) => getSlug(a).localeCompare(getSlug(b)));
 ---
 
 <meta charset="utf-8" />
